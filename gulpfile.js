@@ -87,7 +87,10 @@ var config = {
 };
 
 // default gulp task
-gulp.task('default', ['all', 'watch']);
+gulp.task('default', function () {
+    // tasks wrapped in an array run async
+    runSequence('clean', ['js.vendor', 'js.app', 'js.tpl', 'css', 'index.copy'], 'index.inject', 'watch');
+});
 
 // executes all tasks in the right order
 gulp.task('all', function () {
