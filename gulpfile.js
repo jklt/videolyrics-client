@@ -16,6 +16,7 @@ var minifyCss = require('gulp-minify-css');         // minifies CSS files
 var jshint = require('gulp-jshint');                // gives hints for JavaScript files that breaks coding style rules
 var livereload = require('gulp-livereload');        // automatically reloads files in the browser
 var karma = require('karma').server;                // JavaScript test runner
+var plumber = require('gulp-plumber');              // Makes sure errors will not stop watchers
 
 // directories
 var sourceDir = 'src';                              // source code directory
@@ -180,6 +181,7 @@ function processJs(config) {
     function pipe(process) {
         stream = stream.pipe(process)
     }
+    pipe(plumber()) // don't stop gulp watchers on error
 
     // report coding style violations
     if (config.lint) {
