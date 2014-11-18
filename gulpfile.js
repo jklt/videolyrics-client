@@ -33,7 +33,8 @@ var config = {
             // all libraries in use
             src: [
                 bowerDir + '/angular/angular.js',
-                bowerDir + '/angular-route/angular-route.js'
+                bowerDir + '/angular-route/angular-route.js',
+                bowerDir + '/angular-foundation/mm-foundation-tpls.js'
             ],
             file: 'vendor.min.js',      // output file name
             dest: jsDestDir,            // output directory
@@ -106,7 +107,7 @@ gulp.task('watch', function () {
     gulp.watch(config.js.tpl.watch, ['js.tpl']);
     gulp.watch(config.css.watch, ['css']);
     gulp.watch(config.index.src + '/index.html', ['index']);
-    gulp.watch(destDir).on('change', livereload.changed);
+    gulp.watch(destDir + '/**/*').on('change', livereload.changed);
     karma.start({
         configFile: __dirname + '/karma.conf.js',
         files: config.index.inject.concat([
@@ -144,7 +145,10 @@ gulp.task('js.vendor', function () {
 // js.tpl task caches all application HTML files into one JavaScript file
 gulp.task('js.tpl', function () {
     return gulp.src(config.js.tpl.src)          // load all application HTML files
-        .pipe(tpl(config.js.tpl.file))          // put HTML files into an angular module
+    // put HTML files into an angular module
+        .pipe(tpl(config.js.tpl.file, {
+            module: 'app'
+        }))
         .pipe(file('empty', ''))                // add an empty file for when there are no HTML files
         .pipe(concat(config.js.tpl.file))       // concatenate the empty file and the template file
         .pipe(gulp.dest(config.js.tpl.dest));   // output the template file
