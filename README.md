@@ -9,10 +9,13 @@ videolyrics-client
 4. Run `gulp` while developing. This process watches files and when a file changes, it will run tests and build the application.
 5. Optionally configure a [Homestead](http://laravel.com/docs/homestead) site to serve the application.
 
+### Keeping up-to-date with the 3th party dependencies
+After a `git pull`, run `npm install` (again) if `package.json` or `bower.json` is changed. Otherwise, the build process
+will probably fail.
+
 ### Deploy the application
 1. Make sure the Firebase Command Line Tools are installed globally: run `npm install -g firebase-tools` or `sudo npm -g install firebase-tools`.
 2. `cd` into the `videolyrics-client` directory and run `firebase deploy`.
-
 
 ### Coding style
 We use [John Papa's AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) for the structural style
