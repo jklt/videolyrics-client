@@ -108,12 +108,7 @@ gulp.task('watch', function () {
     gulp.watch(config.css.watch, ['css']);
     gulp.watch(config.index.src + '/index.html', ['index']);
     gulp.watch(destDir + '/**/*').on('change', livereload.changed);
-    karma.start({
-        configFile: __dirname + '/karma.conf.js',
-        files: config.index.inject.concat([
-            appDir + '/**/*.spec.js'
-        ])
-    });
+    runKarma(false)
 });
 
 // clean task deletes the distribution directory
@@ -123,13 +118,7 @@ gulp.task('clean', function (cb) {
 
 // test task to test application JavaScript
 gulp.task('test', function () {
-    karma.start({
-        configFile: __dirname + '/karma.conf.js',
-        files: config.index.inject.concat([
-            appDir + '/**/*.spec.js'
-        ]),
-        singleRun: true
-    });
+    runKarma(true);
 });
 
 // js.app task compiles all application JavaScript into one file
@@ -222,4 +211,22 @@ function processJs(config) {
     pipe(gulp.dest(config.dest));
 
     return stream;
+}
+
+function runKarma(singleRun) {
+    function mapPaths(paths, watched) {
+        return paths.map(function (path) {
+            return {
+                pattern: path,
+                watched: watched
+            }
+        })
+    }
+    karma.start({
+        configFile: __dirname + '/karma.conf.js',
+        files: mapPaths(config.js.vendor.src, false)
+            .concat(mapPaths([appDir + '/**/*.module.js'], true))
+            .concat(mapPaths([appDir + '/**/*.js'], true)),
+        singleRun: singleRun
+    });
 }
