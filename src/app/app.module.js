@@ -1,1 +1,1 @@
-angular.module('app', ['mm.foundation']);
+angular.module('app', ['mm.foundation', 'search']);
