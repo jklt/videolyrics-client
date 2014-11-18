@@ -227,6 +227,7 @@ function runKarma(singleRun) {
     karma.start({
         configFile: __dirname + '/karma.conf.js',
         files: mapPaths(config.js.vendor.src, false)
+            .concat(mapPaths([bowerDir + '/angular-mocks/angular-mocks.js'], false))
             .concat(mapPaths([appDir + '/**/*.module.js'], true))
             .concat(mapPaths([appDir + '/**/*.js'], true)),
         singleRun: singleRun
