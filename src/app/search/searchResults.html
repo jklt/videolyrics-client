@@ -1,0 +1,4 @@
+<p>Search results for <strong>{{ ctrl.query }}</strong>:</p>
+<ul>
+    <li ng-repeat="track in ctrl.tracks"><a href="#/track/{{ track.id }}">{{ track.title }}</a></li>
+</ul>

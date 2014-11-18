@@ -1,2 +1,10 @@
-@import "../../bower_components/foundation/scss/normalize.scss";
-@import "../../bower_components/foundation/scss/foundation.scss";
+// Import Zurb Foundation CSS library (customize defaults in _settings.scss)
+@import "settings";
+@import "../../bower_components/foundation/scss/normalize";
+@import "../../bower_components/foundation/scss/foundation";
+
+// Imports for module specific CSS (e.g. app/moduleName/_moduleName.scss):
+// @import "moduleName/moduleName"
+
+// Additional global CSS or SASS:
+// ...
