@@ -12,3 +12,9 @@ videolyrics-client
 ### Deploy the application
 1. Make sure the Firebase Command Line Tools are installed globally: run `npm install -g firebase-tools` or `sudo npm -g install firebase-tools`.
 2. `cd` into the `videolyrics-client` directory and run `firebase deploy`.
+
+
+### Coding style
+We use [John Papa's AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) for the structural style
+and [JSHint](http://jshint.com] is used, with the configuration suggested by John Papa's AngularJS Style Guide,
+to report simple coding style violations. JSHint runs automatically with `gulp` and notifies violations via the terminal.
