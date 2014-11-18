@@ -32,7 +32,8 @@ var config = {
         vendor: {
             // all libraries in use
             src: [
-                bowerDir + '/angular/angular.js'
+                bowerDir + '/angular/angular.js',
+                bowerDir + '/angular-route/angular-route.js'
             ],
             file: 'vendor.min.js',      // output file name
             dest: jsDestDir,            // output directory
