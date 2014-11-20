@@ -19,7 +19,7 @@ function video($http, $sce) {
     })
         .then(function (response) {
             if (response.data.items.length > 0) {
-                ctrl.videoSrc = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + response.data.items[0].id.videoId);
+                ctrl.videoSrc = $sce.trustAsResourceUrl('//www.youtube.com/embed/' + response.data.items[0].id.videoId);
             }
         })
 }
