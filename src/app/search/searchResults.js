@@ -2,23 +2,14 @@
 angular.module('vl.search')
     .controller('searchResults', searchResults);
 
-function searchResults($location) {
+function searchResults($location, musixMatchAPI) {
     var ctrl = this;
     ctrl.query = $location.search().q;
+    console.log('henk');
+    musixMatchAPI.search(ctrl.query).then(function(data){
+        console.log('data');
+        console.log(data);
+        ctrl.tracks = data.data;
 
-    // dummy data
-    ctrl.tracks = [
-        {
-            title: 'Track 1',
-            id: 1
-        },
-        {
-            title: 'Track 2',
-            id: 2
-        },
-        {
-            title: 'Track 3',
-            id: 3
-        }
-    ];
+    });
 }
