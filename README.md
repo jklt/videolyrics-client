@@ -19,5 +19,5 @@ will probably fail.
 
 ### Coding style
 We use [John Papa's AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) for the structural style
-and [JSHint](http://jshint.com] is used, with the configuration suggested by John Papa's AngularJS Style Guide,
+and [JSHint](http://jshint.com) is used, with the configuration suggested by John Papa's AngularJS Style Guide,
 to report simple coding style violations. JSHint runs automatically with `gulp` and notifies violations via the terminal.
