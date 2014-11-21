@@ -1,25 +1,20 @@
 angular.module('vl.video')
     .controller('video', video);
 
-function video($http, $sce) {
+function video($sce, youtubeSearchApi) {
     var ctrl = this;
+
+    ctrl.videoSrc = undefined;
+    ctrl.videoError = false;
 
     var artist = ctrl.track.artist;
     var title = ctrl.track.title;
 
-    $http.get('https://content.googleapis.com/youtube/v3/search', {
-        params: {
-            part: 'id',
-            type: 'video',
-            q: artist + ' ' + title,
-            videoEmbeddable: true,
-            key: 'AIzaSyAnAt5FyQ5UEv4nvLq83hD0UNCH0Ln-Sto',
-            maxResults: 1
-        }
-    })
-        .then(function (response) {
-            if (response.data.items.length > 0) {
-                ctrl.videoSrc = $sce.trustAsResourceUrl('//www.youtube.com/embed/' + response.data.items[0].id.videoId);
-            }
-        })
+    youtubeSearchApi.searchFirst(artist + ' ' + title)
+        .then(function (videoId) {
+            ctrl.videoSrc = $sce.trustAsResourceUrl('//www.youtube.com/embed/' + videoId);
+        }, function () {
+            ctrl.videoError = true;
+        });
+
 }
