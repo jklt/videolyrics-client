@@ -1,19 +1,18 @@
 angular.module('youtube')
     .factory('youtubeSearchApi', youtubeSearchApi);
 
-function youtubeSearchApi($http, $q) {
+function youtubeSearchApi(youtubeSearchUri, $http, $q) {
     return {
         searchFirst: searchFirst
     };
 
     function searchFirst(query) {
-        return $http.get('https://content.googleapis.com/youtube/v3/search', {
+        return $http.get(youtubeSearchUri, {
             params: {
                 part: 'id',
                 type: 'video',
                 q: query,
                 videoEmbeddable: true,
-                key: 'AIzaSyAnAt5FyQ5UEv4nvLq83hD0UNCH0Ln-Sto',
                 maxResults: 1
             }
         })
