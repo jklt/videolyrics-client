@@ -44,6 +44,24 @@ describe('youtubeSearchApi', function () {
             $httpBackend.verifyNoOutstandingRequest();
 
             expect(actualVideoId).toEqual(expectedVideoId);
+        });
+
+        it('returns an error via the promise when no video is found', function () {
+            $httpBackend.expectGET(youtubeSearchUri + '?maxResults=1&part=id&q=dummy+query&type=video&videoEmbeddable=true')
+                .respond(200, {
+                    items: []
+                });
+
+            var actualError;
+            youtubeSearchApi.searchFirst('dummy query').catch(function (error) {
+                actualError = error;
+            });
+
+            $httpBackend.flush();
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+
+            expect(actualError).toEqual(jasmine.any(Error));
         })
 
     });
