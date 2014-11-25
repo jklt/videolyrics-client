@@ -20,12 +20,12 @@ describe('youtubeSearchApi', function () {
         });
 
         it('returns a promise', function () {
-            expect(youtubeSearchApi.searchFirst()).toBeAPromise();
+            expect(youtubeSearchApi.searchFirst('dummy query')).toBeAPromise();
         });
 
         it('returns the video ID via the promise', function () {
             var expectedVideoId = 12345;
-            $httpBackend.expectGET(youtubeSearchUri + '?maxResults=1&part=id&type=video&videoEmbeddable=true')
+            $httpBackend.expectGET(youtubeSearchUri + '?maxResults=1&part=id&q=dummy+query&type=video&videoEmbeddable=true')
                 .respond(200, {
                     items: [{
                         id: {
@@ -35,7 +35,7 @@ describe('youtubeSearchApi', function () {
                 });
 
             var actualVideoId;
-            youtubeSearchApi.searchFirst().then(function (videoId) {
+            youtubeSearchApi.searchFirst('dummy query').then(function (videoId) {
                 actualVideoId = videoId;
             });
 
