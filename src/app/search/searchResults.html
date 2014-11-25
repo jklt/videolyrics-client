@@ -1,4 +1,81 @@
 <p>Search results for <strong>{{ ctrl.query }}</strong>:</p>
+
+<style>
+	.element{
+		color:rgb(100,100,100);
+		 border-bottom-style: solid;
+    	border-bottom-width: 2px;
+    	border-color:rgb(200,200,200);;
+	}
+	.element:hover { 
+	    background-color: rgb(200,200,200);
+	    color: rgb(25,25,25);
+	}
+	.track{
+	    color: rgb(100,100,100);
+	}
+	.track:hover{
+	    color: rgb(0,0,0);
+	}
+	.cparent{
+		color: rgb(100,100,100);
+		background-color:rgb(255,255,255); 
+	}
+	.cparent:hover{
+		color: rgb(25,25,25);
+		background-color:rgb(220,220,220); 
+	}
+</style>
+
 <ul>
-    <li ng-repeat="track in ctrl.tracks"><a href="#/track/{{ track.track_id }}">{{ track.track_name }} || {{track.artist_name}} || {{track.album_name}}</a></li>
+	<div class="cparent" style="border-radius:32px; list-style-type: none; width:900px; height:200px; overflow:hidden" >
+		<h1 style="color:inherit; margin-left:20px;">ARTISTS</h1>
+		<li ng-repeat="artist in ctrl.artists" style="display: inline;">
+			<a href="#/artist/{{ artist.id }}">
+			<div class = "element" style=" overflow:hidden; border-radius: 32px;line-height: 10%;float:left;height:64px; width:300px; display: inline;">
+				<img align="left" style=" margin-right:10px;border-radius: 32px;display:inline;width:64px; height:64px;" src = "{{ artist.thumbnail }}">
+				<p style="float:left; width:200px;display:inline;text-overflow:ellipsis; text-wrap:none; ">
+				{{ artist.name }}<br>
+				<span style = "color:rgb(150,150,150)">
+				{{ artist.genres[0] }}
+				{{ artist.genres[1] }}
+				</span>
+				</p>
+			</div>
+			</a>
+		</li>
+	</div>
+	<div class="cparent" style="border-radius:32px; list-style-type: none; width:900px; height:200px; overflow:hidden" >
+		<h1 style="color:inherit; margin-left:20px;">ALBUMS</h1>
+		<li ng-repeat="album in ctrl.albums" style="display: inline;">
+			<a href="#/album/{{ album.id }}">
+			<div class = "element" style=" overflow:hidden; border-radius: 32px;line-height: 10%;float:left;height:64px; width:300px; display: inline;">
+				<img align="left" style=" margin-right:10px;border-radius: 32px;display:inline;width:64px; height:64px;" src = "{{ album.thumbnail }}">
+				<p style="float:left; width:200px;display:inline;text-overflow:ellipsis; text-wrap:none; ">
+				{{ album.name }}<br>
+				<span style = "color:rgb(150,150,150)">
+				asdadsfasdf
+				</span>
+				</p>
+			</div>
+			</a>
+		</li>
+	</div>
+	<div class="cparent" style="border-radius:32px; list-style-type: none; width:900px; height:200px; overflow:hidden" >
+		<h1 style="color:inherit; margin-left:20px;">TRACKS</h1>
+	    <li ng-repeat="track in ctrl.tracks" style="display: inline;">
+	    <a class="track" href="#/track/{{ track.id }}">
+	    	<div style=" overflow:hidden; float:left;height:24px; width:300px; display: inline;">
+			    <span style = "margin-left:10px;">
+			    {{ track.name }} 
+			    </span> 
+			    <span style = "color:rgb(150,150,150)">
+			    {{track.artists[0].name}}  
+			    {{track.artists[1].name}}  
+			    </span> 
+		    </div>
+	    </a>
+	    </li>
+	</div>
+
 </ul>
