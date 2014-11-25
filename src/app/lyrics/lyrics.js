@@ -6,6 +6,10 @@ angular.module('vl.lyrics')
 function lyrics() {
     var ctrl = this;
 
-    // log lyrics to console
-    console.log('lyrics: ', ctrl.track.lyrics);
+
+    ctrl.track.then(function(track){
+    	ctrl.track_name = track.track_name;
+    	ctrl.lyrics = track.lyrics_id;
+	    console.log('lyrics: ', track.lyrics_id);
+    });
 }

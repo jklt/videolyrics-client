@@ -2,14 +2,12 @@
 angular.module('vl.videoLyrics')
     .controller('videoLyrics', videoLyrics);
 
-function videoLyrics($routeParams) {
+function videoLyrics(musixMatchAPI, $routeParams) {
     var ctrl = this;
     var trackId = $routeParams.trackId;
-    // dummy data
-    ctrl.track = {
-        id: trackId,
-        title: 'Track ' + trackId,
-        artist: 'Artist Name',
-        lyrics: 'Lyrics lyrics\n\nlalala'
-    };
+    ctrl.track = musixMatchAPI.get(trackId)
+        .then(function (response) {
+            return response.data;
+        });
+    
 }

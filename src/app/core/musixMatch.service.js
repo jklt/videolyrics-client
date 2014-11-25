@@ -7,7 +7,9 @@ function musixMatchAPI($http, $q) {
     // public interface:
     var service = {
         search: searchTrack,
-        get: getTrack
+        get: getTrack,
+        getLyrs: getLyrics,
+        getSubs: getSubtitles
     };
 
 
@@ -28,8 +30,8 @@ function musixMatchAPI($http, $q) {
             });
     }
 
-    function APIget(id){
-         return $http.get('https://musixmatchcom-musixmatch.p.mashape.com/wsr/1.1/track.get', {
+    function getTrackInfo(id, objective){
+         return $http.get('https://musixmatchcom-musixmatch.p.mashape.com/wsr/1.1/track.' + objective, {
             params: {
                 track_id: id
             },
@@ -42,6 +44,10 @@ function musixMatchAPI($http, $q) {
             });
     }
 
+    function APIget(id){
+         return getTrackInfo(id, 'get');
+    }
+
     function getTrack(id){
         if (cache[id]){
             return $q.when(cache[id]);
@@ -49,6 +55,14 @@ function musixMatchAPI($http, $q) {
             return APIget(id);
         }
 
+    }
+
+    function getLyrics(id){
+         return getTrackInfo(id, 'lyrics.get');
+    }
+
+    function getSubtitles(id){
+         return getTrackInfo(id, 'subtitles.get');
     }
     return service;
 }

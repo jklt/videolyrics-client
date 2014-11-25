@@ -7,14 +7,19 @@ function video($sce, youtubeSearchApi) {
     ctrl.videoSrc = undefined;
     ctrl.videoError = false;
 
-    var artist = ctrl.track.artist;
-    var title = ctrl.track.title;
 
-    youtubeSearchApi.searchFirst(artist + ' ' + title)
-        .then(function (videoId) {
-            ctrl.videoSrc = $sce.trustAsResourceUrl('//www.youtube.com/embed/' + videoId);
-        }, function () {
-            ctrl.videoError = true;
-        });
+
+    ctrl.track.then(function(track){
+        var artist = track.artist_name;
+        var title = track.track_name;
+
+        youtubeSearchApi.searchFirst(artist + ' ' + title)
+            .then(function (videoId) {
+                ctrl.videoSrc = $sce.trustAsResourceUrl('//www.youtube.com/embed/' + videoId);
+            }, function () {
+                ctrl.videoError = true;
+            });
+    });
+    
 
 }
