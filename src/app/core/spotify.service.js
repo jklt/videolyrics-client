@@ -3,12 +3,14 @@ angular.module('vl.core')
     .factory('spotifyAPI', spotifyAPI);
 
 function spotifyAPI($http, $q) {
-    var cache = {};
+    var tracksCache = {};
+    var albumsCache = {};
     // public interface:
     var service = {
         searchTracks: APIsearchTracks,
         search: APIsearch,
-        getTrack: getTrack
+        getTrack: getTrack,
+        getAlbum: getAlbum
     };
 
     var baseURL = "https://video-lyrics.herokuapp.com/1.0/proxy/spotify/";
@@ -16,7 +18,15 @@ function spotifyAPI($http, $q) {
     function APIgetTrack(id){
          return $http.get(baseURL + 'tracks/' + id)
              .then(function (data) {
-                cache[data.data.id] = data.data;
+                tracksCache[data.data.id] = data.data;
+                return data;
+            });
+    }
+
+    function APIgetAlbum(id){
+         return $http.get(baseURL + 'albums/' + id)
+             .then(function (data) {
+                albumsCache[data.data.id] = data.data;
                 return data;
             });
     }
@@ -29,7 +39,7 @@ function spotifyAPI($http, $q) {
                 limit:"6"
             }
         }).then(function (data) {
-                cache[data.data.track_id] = data.data;
+                tracksCache[data.data.track_id] = data.data;
                 return data;
             });
     }
@@ -42,17 +52,27 @@ function spotifyAPI($http, $q) {
                 limit:"15"
             }
         }).then(function (data) {
-                cache[data.data.track_id] = data.data;
+                tracksCache[data.data.track_id] = data.data;
                 return data;
             });
     }
 
 
     function getTrack(id){
-        if (cache[id]){
-            return $q.when(cache[id]);
+        if (tracksCache[id]){
+            return $q.when(tracksCache[id]);
         }else{
             return APIgetTrack(id);
+        }
+
+    }
+
+
+    function getAlbum(id){
+        if (albumsCache[id]){
+            return $q.when(albumsCache[id]);
+        }else{
+            return APIgetAlbum(id);
         }
 
     }
