@@ -14,11 +14,8 @@ function spotifyAPI($http, $q) {
     var baseURL = "https://video-lyrics.herokuapp.com/1.0/proxy/spotify/";
 
     function APIgetTrack(id){
-         return $http.get(baseURL + 'tracks', {
-            params: {
-                id: id
-            },
-        }).then(function (data) {
+         return $http.get(baseURL + 'tracks/' + id)
+             .then(function (data) {
                 cache[data.data.id] = data.data;
                 return data;
             });
