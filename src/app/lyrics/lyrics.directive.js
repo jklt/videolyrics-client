@@ -5,7 +5,8 @@ angular.module('vl.lyrics')
 function vlLyrics() {
     return {
         scope: {
-            'track': '='
+            'track': '=',
+            'trackId': '='
         },
         templateUrl: 'lyrics/lyrics.html',
         replace: true,
