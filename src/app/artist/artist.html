@@ -28,12 +28,13 @@
 
 <div>
 
+
 <img align="left" style=" margin-right:10px;border-radius: 32px;display:inline;width:64px; height:64px;" src = "{{ ctrl.artist.thumbnail }}">
 	<h1>{{ ctrl.artist.name }}</h1>
 	<div class="cparent" style="border-radius:32px; list-style-type: none; width:900px; height:600px; overflow:hidden" >
 		<h1 style="color:inherit; margin-left:20px;">ALBUMS</h1>
 		<li ng-repeat="album in ctrl.albums" style="display: inline;">
-			<a href="#/album/{{ album.id }}">
+			<a href="#/albums/{{ album.id }}">
 			<div class = "element" style=" overflow:hidden; border-radius: 32px;line-height: 10%;float:left;height:64px; width:300px; display: inline;">
 				<img align="left" style=" margin-right:10px;border-radius: 32px;display:inline;width:64px; height:64px;" src = "{{ album.thumbnail }}">
 				<p style="float:left; width:200px;display:inline;text-overflow:ellipsis; text-wrap:none; ">

@@ -8,5 +8,10 @@ function config($routeProvider) {
             templateUrl: 'videoLyrics/videoLyrics.html',
             controller: 'videoLyrics',
             controllerAs: 'ctrl'
+        })
+        .when('/albums/:albumId', {
+            templateUrl: 'videoLyrics/videoLyrics.html',
+            controller: 'videoLyrics',
+            controllerAs: 'ctrl'
         });
 }
