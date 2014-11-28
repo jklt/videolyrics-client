@@ -2,10 +2,10 @@
 angular.module('vl.videoLyrics')
     .controller('videoLyrics', videoLyrics);
 
-function videoLyrics(musixMatchAPI, $routeParams) {
+function videoLyrics(spotifyAPI, $routeParams) {
     var ctrl = this;
     var trackId = $routeParams.trackId;
-    ctrl.track = musixMatchAPI.get(trackId)
+    ctrl.track = spotifyAPI.getTrack(trackId)
         .then(function (response) {
             return response.data;
         });

@@ -10,8 +10,8 @@ function video($sce, youtubeSearchApi) {
 
 
     ctrl.track.then(function(track){
-        var artist = track.artist_name;
-        var title = track.track_name;
+        var artist = track.artists[0].name;
+        var title = track.name;
 
         youtubeSearchApi.searchFirst(artist + ' ' + title)
             .then(function (videoId) {
