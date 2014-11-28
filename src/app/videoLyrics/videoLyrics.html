@@ -1,4 +1,11 @@
+<div class="row">
+<div class="columns medium-8 large-10">
 <div>
-    <vl-lyrics track="ctrl.track"></vl-lyrics>
+    <vl-lyrics track="ctrl.track" track-id="ctrl.trackId"></vl-lyrics>
     <vl-video track="ctrl.track"></vl-video>
+</div>
+</div>
+<div class="columns medium-4 large-2">
+    <vl-track-list album-id="{{ctrl.track.album.id}}" selected-track-id="{{ctrl.track.id}}"></vl-track-list>
+</div>
 </div>
