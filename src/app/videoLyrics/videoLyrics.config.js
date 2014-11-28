@@ -4,7 +4,7 @@ angular.module('vl.videoLyrics')
 
 function config($routeProvider) {
     $routeProvider
-        .when('/track/:trackId', {
+        .when('/albums/:albumId/tracks/:trackId', {
             templateUrl: 'videoLyrics/videoLyrics.html',
             controller: 'videoLyrics',
             controllerAs: 'ctrl'
