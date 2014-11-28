@@ -9,8 +9,8 @@ function videoLyrics(spotifyAPI, $routeParams) {
     var albumId = $routeParams.albumId;
     ctrl.albumId = albumId;
     ctrl.track = spotifyAPI.getTrack(trackId)
-        .then(function (response) {
-            return response.data;
+        .then(function (data) {
+            return data;
         });
     
 }

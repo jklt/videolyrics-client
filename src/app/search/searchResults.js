@@ -14,15 +14,15 @@ function searchResults($location, spotifyAPI) {
     spotifyAPI.search(ctrl.query).then(function(data){
         console.log('data');
         console.log(data);
-        ctrl.artists = data.data.artists.items;
+        ctrl.artists = data.artists.items;
         findThumbnails(ctrl.artists);
-        ctrl.albums = data.data.albums.items;
+        ctrl.albums = data.albums.items;
         findThumbnails(ctrl.albums);
     });
     spotifyAPI.searchTracks(ctrl.query).then(function(data){
         console.log('data');
         console.log(data);
-        ctrl.tracks = data.data.tracks.items;
+        ctrl.tracks = data.tracks.items;
     });
 }
 

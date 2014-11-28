@@ -21,7 +21,7 @@ function spotifyAPI($http, $q) {
          return $http.get(baseURL + 'tracks/' + id)
              .then(function (data) {
                 tracksCache[data.data.id] = data.data;
-                return data;
+                return data.data;
             });
     }
 
@@ -29,7 +29,7 @@ function spotifyAPI($http, $q) {
          return $http.get(baseURL + 'albums/' + id)
              .then(function (data) {
                 albumsCache[data.data.id] = data.data;
-                return data;
+                return data.data;
             });
     }
 
@@ -56,7 +56,7 @@ function spotifyAPI($http, $q) {
             }
         }).then(function (data) {
                 tracksCache[data.data.track_id] = data.data;
-                return data;
+                return data.data;
             });
     }
 
@@ -69,7 +69,7 @@ function spotifyAPI($http, $q) {
             }
         }).then(function (data) {
                 tracksCache[data.data.track_id] = data.data;
-                return data;
+                return data.data;
             });
     }
 
