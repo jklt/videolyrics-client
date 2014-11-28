@@ -1,6 +1,8 @@
-<div>
-    Album: {{ctrl.albumTitle}}
+<div class="trackList">
+    Album: <strong>{{ctrl.album.name}}</strong>
     <ol>
-        <li ng-repeat="track in ctrl.tracks">{{track.name}}</li>
+        <li ng-repeat="track in ctrl.tracks" ng-class="{selected: ctrl.selectedTrackId === track.id}">
+            <a href="#/albums/{{ctrl.album.id}}/tracks/{{track.id}}">{{track.name}}</a>
+        </li>
     </ol>
 </div>
