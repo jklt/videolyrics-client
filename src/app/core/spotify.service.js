@@ -36,7 +36,6 @@ function spotifyAPI($http, $q) {
      function getArtistAlbums(id){
          return $http.get(baseURL + 'artists/' + id + '/albums?limit=24&album_type=album&market=ES')
              .then(function (data) {
-                cache[data.data.id] = data.data;
                 return data;
             });
     }
@@ -44,7 +43,6 @@ function spotifyAPI($http, $q) {
     function getArtist(id){
           return $http.get(baseURL + 'artists/' + id)
              .then(function (data) {
-                cache[data.data.id] = data.data;
                 return data;
             });
     }
