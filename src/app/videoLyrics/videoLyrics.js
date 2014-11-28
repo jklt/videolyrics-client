@@ -5,6 +5,9 @@ angular.module('vl.videoLyrics')
 function videoLyrics(spotifyAPI, $routeParams) {
     var ctrl = this;
     var trackId = $routeParams.trackId;
+    ctrl.trackId = trackId;
+    var albumId = $routeParams.albumId;
+    ctrl.albumId = albumId;
     ctrl.track = spotifyAPI.getTrack(trackId)
         .then(function (response) {
             return response.data;

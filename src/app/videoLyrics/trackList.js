@@ -4,6 +4,9 @@ angular.module('vl.videoLyrics')
 function trackList() {
     var ctrl = this;
 
+    console.log(ctrl.selectedTrackId);
+    console.log(ctrl.albumId);
+
     ctrl.tracks = [{
         name: 'Track 1'
     }, {
