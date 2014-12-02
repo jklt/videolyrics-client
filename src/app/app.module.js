@@ -2,5 +2,6 @@
 angular.module('app', [
     'vl.search',
     'vl.videoLyrics',
-    'vl.artist'
+    'vl.artist',
+    'vl.playBar'
 ]);
