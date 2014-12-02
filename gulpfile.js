@@ -71,10 +71,10 @@ var config = {
     },
     // config for css related tasks
     'css': {
-        src: appDir + '/**/*.scss',     // all SCSS files in the application directory
+        src: appDir + '/app.scss',     // all SCSS files in the application directory
         file: 'app.css',                // output file name
         dest: cssDestDir,               // output directory
-        watch: appDir + '/app.scss'
+        watch: appDir + '/**/*.scss'
     },
     // config for index.html related tasks
     'index': {

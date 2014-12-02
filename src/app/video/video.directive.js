@@ -1,7 +1,7 @@
 angular.module('vl.video')
     .directive('vlVideo', vlVideo);
 
-function vlVideo() {
+function vlVideo(youtubePlayer) {
     return {
         scope: {
             'track': '='
@@ -10,6 +10,9 @@ function vlVideo() {
         replace: true,
         controller: 'video',
         controllerAs: 'ctrl',
-        bindToController: true
+        bindToController: true,
+        link: function (_, element, __, ctrl) {
+            youtubePlayer.init(element[0], ctrl.playerReady, ctrl.stateChanged);
+        }
     };
 }
