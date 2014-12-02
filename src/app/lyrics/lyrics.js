@@ -3,17 +3,17 @@ angular.module('vl.lyrics')
     .controller('lyrics', lyrics);
 
 // track attribute will bind to this controller
-function lyrics(chartLyricsAPI) {
+function lyrics(azLyricsAPI) {
     var ctrl = this;
 
 
     ctrl.track.then(function(track){
     	ctrl.track_name = track.name;
     	ctrl.artist = track.artists[0].name;
-
-    	chartLyricsAPI.searchLyricDirect(ctrl.artist, ctrl.track_name)
+    	azLyricsAPI.getLyrics(ctrl.artist, ctrl.track_name)
     		.then(function (response) {
-        		ctrl.lyrics = response.data.lyrics_body;
+    			console.log(response.data.lyrics);
+				ctrl.lyrics = response.data.lyrics;
     		});
     });
 }

@@ -3,7 +3,7 @@
 angular.module('vl.core', [
     // application core modules
     'youtube',
-    'chartLyrics',
+    'azLyrics',
 
     // 3th party dependencies
     'ngRoute',          // Angular Router
