@@ -3,9 +3,6 @@ angular.module('vl.video')
 
 function vlVideo(youtubePlayer) {
     return {
-        scope: {
-            'track': '='
-        },
         templateUrl: 'video/video.html',
         replace: true,
         controller: 'video',

@@ -1,7 +1,7 @@
 angular.module('vl.video')
     .controller('video', video);
 
-function video($location, youtubeSearchApi, spotifyAPI) {
+function video(youtubeSearchApi, nowPlaying, $location) {
     var ctrl = this;
 
     ctrl.playerReady = playerReady;
@@ -14,20 +14,21 @@ function video($location, youtubeSearchApi, spotifyAPI) {
     var albumId = undefined;
     var trackId = undefined;
 
-    ctrl.track.then(function (track) {
-        albumId = track.album.id;
-        trackId = track.id;
-        var artist = track.artists[0].name;
-        var title = track.name;
-
-        youtubeSearchApi.searchFirst(artist + ' ' + title)
-            .then(function (id) {
-                videoId = id;
-                loadVideo();
-            }, function () {
-                ctrl.videoError = true;
-            });
-    });
+    //
+    //ctrl.track.then(function (track) {
+    //    albumId = track.album.id;
+    //    trackId = track.id;
+    //    var artist = track.artists[0].name;
+    //    var title = track.name;
+    //
+    //    youtubeSearchApi.searchFirst(artist + ' ' + title)
+    //        .then(function (id) {
+    //            videoId = id;
+    //            loadVideo();
+    //        }, function () {
+    //            ctrl.videoError = true;
+    //        });
+    //});
 
     var player = undefined;
 
