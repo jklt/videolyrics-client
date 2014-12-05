@@ -7,12 +7,13 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
     ctrl.playerReady = playerReady;
     ctrl.stateChanged = stateChanged;
 
-    ctrl.videoSrc = undefined;
-    ctrl.videoError = false;
-
     var videoId = undefined;
     var albumId = undefined;
     var trackId = undefined;
+
+    var player = undefined;
+    var state = undefined;
+
 
     $scope.$watch(function () {
         return nowPlaying.getTrack();
@@ -26,12 +27,23 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
                     videoId = id;
                     loadVideo();
                 }, function () {
-                    ctrl.videoError = true;
                 });
         }
     });
 
-    var player = undefined;
+    $scope.$watch(function () {
+        return nowPlaying.isPaused();
+    }, function () {
+        if (nowPlaying.isPaused()) {
+            if (state === 1) {
+                player.pauseVideo();
+            }
+        } else {
+            if (state === 2) {
+                player.playVideo();
+            }
+        }
+    });
 
     function playerReady(event) {
         player = event.target;
@@ -39,7 +51,8 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
     }
 
     function stateChanged(event) {
-        if (event.data == 0) {
+        state = event.data;
+        if (state === 0) {
             spotifyAPI.getAlbum(albumId)
                 .then(function (album) {
                     var nextTrack = false;
@@ -52,7 +65,12 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
                             nextTrack = true;
                         }
                     })
-                })
+                });
+        }
+        if (state === 1) {
+            nowPlaying.setPlaying(true);
+        } else {
+            nowPlaying.setPlaying(false);
         }
     }
 

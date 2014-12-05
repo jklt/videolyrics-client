@@ -11,11 +11,14 @@ function nowPlaying(spotifyAPI) {
         play: play,
         pause: pause,
         isPlaying: isPlaying,
+        setPlaying: setPlaying,
+        isPaused: isPaused,
         getPosition: getPosition,
         getBuffered: getBuffered
     };
 
-    var currentTrack, currentAlbum;
+    var currentTrack, currentAlbum, currentTrackIsPlaying;
+    var paused = false;
 
     return service;
 
@@ -47,15 +50,23 @@ function nowPlaying(spotifyAPI) {
     }
 
     function play() {
-        console.log('play');
+        paused = false;
     }
 
     function pause() {
-        console.log('pause');
+        paused = true;
     }
 
     function isPlaying() {
-        return true;
+        return currentTrackIsPlaying;
+    }
+
+    function setPlaying(playing) {
+        currentTrackIsPlaying = playing;
+    }
+
+    function isPaused() {
+        return paused;
     }
 
     function getPosition() {

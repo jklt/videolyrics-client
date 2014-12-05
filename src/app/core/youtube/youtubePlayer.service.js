@@ -13,6 +13,13 @@ function youtubePlayer(youtubePlayerApi, $q, $rootScope) {
                     events: {
                         'onReady': onPlayerReady,
                         'onStateChange': onPlayerStateChange
+                    },
+                    playerVars: {
+                        controls: 0,
+                        rel: 0,
+                        modestbranding: 1,
+                        iv_load_policy: 3,
+                        showinfo: 0
                     }
                 });
             });
