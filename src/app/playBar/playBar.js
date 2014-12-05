@@ -19,6 +19,9 @@ function playBar($location, nowPlaying) {
 
     function getAlbum() {
         var retval = nowPlaying.getAlbum();
+        if (!retval){
+            return undefined;
+        }
         if (retval.images.length == 0){
             retval.images[0] = "http://asset-d.soup.io/asset/1377/8322_d804_48-square.png";
         }
@@ -26,11 +29,17 @@ function playBar($location, nowPlaying) {
     }
 
     function getTrack() {
-        console.log('get');
         var retval = nowPlaying.getTrack();
+        if (!retval){
+            return undefined;
+        }
         var secs = Math.floor(retval.duration_ms/1000);
         retval.duration_secs = secs;
-        retval.durationstr = Math.floor(secs/60) + ':' + secs%60;
+        if (secs%60 < 10){
+            retval.durationstr = Math.floor(secs/60) + ':0' + secs%60;
+        }else{
+            retval.durationstr = Math.floor(secs/60) + ':' + secs%60;
+        }
         return retval;
     }
 

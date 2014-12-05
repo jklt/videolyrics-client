@@ -27,7 +27,7 @@ function nowPlaying(spotifyAPI) {
         spotifyAPI.getTrack(id)
             .then(function (track) {
                 currentTrack = track;
-                spotifyAPI.getAlbum()
+                spotifyAPI.getAlbum(track.album.id)
                     .then(function (album) {
                         currentAlbum = album;
                     })
