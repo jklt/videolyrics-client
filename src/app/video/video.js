@@ -67,11 +67,13 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
                     })
                 });
         }
-        if (state === 1) {
-            nowPlaying.setPlaying(true);
-        } else {
-            nowPlaying.setPlaying(false);
-        }
+        $scope.$apply(function () {
+            if (state === 1) {
+                nowPlaying.setPlaying(true);
+            } else {
+                nowPlaying.setPlaying(false);
+            }
+        });
     }
 
     function loadVideo() {

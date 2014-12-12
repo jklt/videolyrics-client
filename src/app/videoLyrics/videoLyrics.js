@@ -2,11 +2,11 @@
 angular.module('vl.videoLyrics')
     .controller('videoLyrics', videoLyrics);
 
-function videoLyrics(spotifyAPI, $routeParams, nowPlaying) {
+function videoLyrics(spotifyAPI, $stateParams, nowPlaying) {
     var ctrl = this;
-    var trackId = $routeParams.trackId;
+    var trackId = $stateParams.trackId;
     ctrl.trackId = trackId;
-    var albumId = $routeParams.albumId;
+    var albumId = $stateParams.albumId;
     ctrl.albumId = albumId;
 
     nowPlaying.setTrack(trackId);

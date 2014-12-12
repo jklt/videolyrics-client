@@ -4,10 +4,6 @@ angular.module('vl.videoLyrics')
 
 function trackList() {
     return {
-        scope: {
-            albumId: '@',
-            selectedTrackId: '@'
-        },
         templateUrl: 'videoLyrics/trackList.html',
         replace: true,
         controller: 'trackList',

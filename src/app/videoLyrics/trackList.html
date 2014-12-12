@@ -1,30 +1,10 @@
+<div class="grid-content trackList">
+    <p>Album: <strong>{{ctrl.getAlbum().name}}</strong></p>
 
-
-<div class="trackList">
-<style type="text/css">
-	::-webkit-scrollbar
-{
-  width: 8px;  /* for vertical scrollbars */
-  height: 12px; /* for horizontal scrollbars */
-}
-
-::-webkit-scrollbar-track
-{
-  background: rgb(0, 0, 0);
-}
-
-::-webkit-scrollbar-thumb
-{
-  background: rgb(50, 50, 50);
-}
-</style>
-    Album: <strong>{{ctrl.album.name}}</strong>
-    <div ng-style="{height: ctrl.getScreenheight(), overflow:'auto', position:'absolute', top: 0, left:0, right:0, bottom:0}">
-    
-	    <ol>
-	        <li ng-repeat="track in ctrl.tracks" ng-class="{selected: ctrl.selectedTrackId === track.id}">
-	            <a href="#/albums/{{ctrl.album.id}}/tracks/{{track.id}}">{{track.name}}</a>
-	        </li>
-	    </ol>
-    </div>
+    <ol>
+        <li ng-repeat="track in ctrl.getAlbum().tracks.items"
+            ng-class="{selected: ctrl.getTrack().id === track.id}">
+            <a href="#/albums/{{ctrl.getAlbum().id}}/tracks/{{track.id}}">{{track.name}}</a>
+        </li>
+    </ol>
 </div>

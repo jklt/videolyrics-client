@@ -1,0 +1,7 @@
+<div class="grid-content">
+<a href="#/albums/{{ctrl.getAlbum().id}}"><img class="albumcover" src ="{{ctrl.getAlbum().images[0].url}}"></a>
+<div class="albuminfo">
+    <a href="#/artist/{{ctrl.getTrack().artists[0].id}}">{{ctrl.getTrack().artists[0].name}}</a><br>
+    <a href="#/albums/{{ctrl.getAlbum().id}}/tracks/{{ctrl.getTrack().id}}">{{ctrl.getTrack().name}}</a>
+</div>
+</div>

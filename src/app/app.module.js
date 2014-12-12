@@ -3,5 +3,6 @@ angular.module('app', [
     'vl.search',
     'vl.videoLyrics',
     'vl.artist',
-    'vl.playBar'
+    'vl.playBar',
+    'vl.albumCover'
 ]);

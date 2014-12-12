@@ -1,14 +1,8 @@
-<form ng-submit="ctrl.search()">
-    <div class="row">
-        <div class="large-12 columns">
-            <div class="row collapse">
-                <div class="small-9 columns">
-                    <input type="text" placeholder="Search for a song" ng-model="ctrl.query">
-                </div>
-                <div class="small-3 columns">
-                    <button class="button postfix">Search</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+<div class="grid-content search-box-container">
+    <form ng-submit="ctrl.search()">
+        <span class="inline-label">
+            <input type="search" placeholder="Search for a song, album or artist" ng-model="ctrl.query">
+            <button class="large button">Search</button>
+        </span>
+    </form>
+</div>

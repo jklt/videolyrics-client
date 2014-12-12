@@ -1,17 +1,15 @@
 angular.module('vl.videoLyrics')
     .controller('trackList', trackList);
 
-function trackList(spotifyAPI) {
+function trackList(nowPlaying) {
     var ctrl = this;
+
+    ctrl.getTrack = nowPlaying.getTrack;
+    ctrl.getAlbum = nowPlaying.getAlbum;
 
     ctrl.getScreenheight = function(){
     	console.log(window.innerHeight);
     	return window.innerHeight - 100;
-    }
-    spotifyAPI.getAlbum(ctrl.albumId)
-        .then(function (data) {
-            ctrl.album = data;
-            ctrl.tracks = data.tracks.items;
-        });
+    };
 
 }

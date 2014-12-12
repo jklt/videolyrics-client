@@ -2,14 +2,16 @@
 angular.module('vl.videoLyrics')
     .config(config);
 
-function config($routeProvider) {
-    $routeProvider
-        .when('/albums/:albumId/tracks/:trackId', {
+function config($stateProvider) {
+    $stateProvider
+        .state('track', {
+            url: '/albums/:albumId/tracks/:trackId',
             templateUrl: 'videoLyrics/videoLyrics.html',
             controller: 'videoLyrics',
             controllerAs: 'ctrl'
         })
-        .when('/albums/:albumId', {
+        .state('album', {
+            url: '/albums/:albumId',
             templateUrl: 'videoLyrics/videoLyrics.html',
             controller: 'videoLyrics',
             controllerAs: 'ctrl'

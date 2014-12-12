@@ -17,6 +17,7 @@ var jshint = require('gulp-jshint');                // gives hints for JavaScrip
 var livereload = require('gulp-livereload');        // automatically reloads files in the browser
 var karma = require('karma').server;                // JavaScript test runner
 var plumber = require('gulp-plumber');              // Makes sure errors will not stop watchers
+var watch = require('gulp-watch');                  // improved gulp watcher
 
 // directories
 var sourceDir = 'src';                              // source code directory
@@ -114,10 +115,18 @@ gulp.task('all', function () {
 // watch task in order to react to file changes during development
 gulp.task('watch', function () {
     livereload.listen();
-    gulp.watch(config.js.app.watch, ['js.app']);
-    gulp.watch(config.js.tpl.watch, ['js.tpl']);
-    gulp.watch(config.css.watch, ['css']);
-    gulp.watch(config.index.src + '/index.html', ['index']);
+    gulp.watch(config.js.app.watch, function () {
+        gulp.start('js.app');
+    });
+    gulp.watch(config.js.tpl.watch, function () {
+        gulp.start('js.tpl');
+    });
+    gulp.watch(config.css.watch, function () {
+        gulp.start('css');
+    });
+    gulp.watch(config.index.src + '/index.html', function () {
+        gulp.start('index');
+    });
     gulp.watch(destDir + '/**/*').on('change', livereload.changed);
     runKarma(false)
 });
@@ -166,6 +175,7 @@ gulp.task('js.tpl', function () {
 // css task takes all scss files
 gulp.task('css', function () {
     return gulp.src(config.css.src)             // load all SCSS files
+        .pipe(plumber())                        // prevent stopping the process on errors
         .pipe(sass())                           // run sass preprocessor
         .pipe(autoprefix('last 2 versions'))    // autoprefix CSS for older browsers
         .pipe(concat(config.css.file))          // concatenate CSS files

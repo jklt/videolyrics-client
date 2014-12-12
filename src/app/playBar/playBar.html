@@ -1,14 +1,28 @@
-<div class="footer">
-    <div class="albuminfo">
-        <a href="#/artist/{{ctrl.getTrack().artists[0].id}}">{{ctrl.getTrack().artists[0].name}}</a><br>
-       <a href="#/albums/{{ctrl.getAlbum().id}}/tracks/{{ctrl.getTrack().id}}">{{ctrl.getTrack().name}}</a>
+<div class="grid-block play-bar">
+    <div class="grid-content shrink play-buttons">
+        <ul class="button-group large">
+            <li>
+                <a ng-click="ctrl.play()" ng-show="!ctrl.isPlaying()">
+                    <i class="fa fa-fw fa-play"></i>
+                </a>
+                <a ng-click="ctrl.pause()" ng-show="ctrl.isPlaying()">
+                    <i class="fa fa-fw fa-pause"></i>
+                </a>
+            </li>
+            <li><a ng-click="ctrl.previous()"><i class="fa fa-fw fa-step-backward"></i></a></li>
+            <li><a ng-click="ctrl.next()"><i class="fa fa-fw fa-step-forward"></i></a></li>
+        </ul>
     </div>
-    <a href="#/albums/{{ctrl.getAlbum().id}}"><img class="albumcover" src ="{{ctrl.getAlbum().images[0].url}}"></a>
-    <button ng-click="ctrl.play()" class="playbutton">PLAY</button>
-    <button ng-click="ctrl.previous()" class="prevbutton">P</button>
-    <button ng-click="ctrl.next()" class="nextbutton">N</button>
-    <div class="bufferbar" style="width:{{ctrl.getBuffered()/ctrl.getTrack().duration_secs*100}}%;"></div>
-    <div class="progressbar" style="width:{{ctrl.getPosition()/ctrl.getTrack().duration_secs*100}}%;"></div>
-    <h2 class="curtime">{{ctrl.getTrack().durationstr}}</h2>
-    <button class="fullscreen">F</button>
+    <div class="grid-block bars">
+        <div class="grid-content shrink progressbar" style="width:{{ctrl.getPosition()/ctrl.getTrack().duration_secs*100}}%;"></div>
+        <div class="grid-content shrink bufferbar" style="width:{{ctrl.getBuffered()/ctrl.getTrack().duration_secs*100-ctrl.getPosition()/ctrl.getTrack().duration_secs*100}}%;"></div>
+    </div>
+    <div class="grid-block shrink vertical align-center">
+        <div class="grid-content shrink">
+            <span class="curtime">{{ctrl.getTrack().durationstr}}</span>
+        </div>
+    </div>
+    <div class="grid-content shrink">
+        <button class="large button"><i class="fa fa-fw fa-expand"></i></button>
+    </div>
 </div>

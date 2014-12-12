@@ -2,9 +2,10 @@
 angular.module('vl.artist')
     .config(config);
 
-function config($routeProvider) {
-    $routeProvider
-        .when('/artist/:artistId', {
+function config($stateProvider) {
+    $stateProvider
+        .state('artist', {
+            url: '/artist/:artistId',
             templateUrl: 'artist/artist.html',
             controller: 'artist',
             controllerAs: 'ctrl'
