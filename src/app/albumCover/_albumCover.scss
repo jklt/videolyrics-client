@@ -1,29 +1,33 @@
+.album-cover-container {
 
-.albumcover {
-   height:200px;
-   width:200px;
-   background:rgb(50,50,50);
-}
+  padding: 0;
 
-.albumcover:hover{
-  opacity:0.9;
-}
+  .albumcover {
+    height: 200px;
+    width: 200px;
+    background: rgb(50, 50, 50);
+  }
 
-.albuminfo{
-   height:50px;
-   width:200px;
-   color:rgb(225,225,225);
-   background:rgb(25,25,25);
-}
+  .albumcover:hover {
+    opacity: 0.9;
+  }
 
-.albuminfo:hover{
-   background:rgb(50,50,50);
-}
+  .albuminfo {
+    height: 50px;
+    width: 200px;
+    color: rgb(225, 225, 225);
+    background: rgb(25, 25, 25);
+  }
 
-.albuminfo a{
-  color:inherit;
-   text-decoration: none;
-}
-.albuminfo a:hover{
-   text-decoration: underline;
+  .albuminfo:hover {
+    background: rgb(50, 50, 50);
+  }
+
+  .albuminfo a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .albuminfo a:hover {
+    text-decoration: underline;
+  }
 }
