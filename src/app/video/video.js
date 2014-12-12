@@ -1,7 +1,7 @@
 angular.module('vl.video')
     .controller('video', video);
 
-function video(youtubeSearchApi, $scope, nowPlaying, $location) {
+function video(youtubeSearchApi, $scope, nowPlaying) {
     var ctrl = this;
 
     ctrl.playerReady = playerReady;
@@ -39,19 +39,7 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
     function stateChanged(event) {
         state = event.data;
         if (state === 0) {
-            spotifyAPI.getAlbum(albumId)
-                .then(function (album) {
-                    var nextTrack = false;
-                    angular.forEach(album.tracks.items, function (track) {
-                        if (nextTrack) {
-                            $location.path('albums/' + albumId + '/tracks/' + track.id);
-                            nextTrack = false;
-                        }
-                        if (track.id == trackId) {
-                            nextTrack = true;
-                        }
-                    })
-                });
+            nowPlaying.next();
         }
         $scope.$apply(function () {
             if (state === 1) {
