@@ -1,7 +1,7 @@
 angular.module('vl.core')
     .factory('nowPlaying', nowPlaying);
 
-function nowPlaying(spotifyAPI, navigator) {
+function nowPlaying(spotifyAPI, navigator, $timeout) {
     var service = {
         getTrack: getTrack,
         setTrack: setTrack,
@@ -13,12 +13,15 @@ function nowPlaying(spotifyAPI, navigator) {
         isPlaying: isPlaying,
         setPlaying: setPlaying,
         getPosition: getPosition,
+        setPosition: setPosition,
         getBuffered: getBuffered,
+        setBuffered: setBuffered,
+        setBufferedFraction: setBufferedFraction,
         addActionListener: addActionListener,
         removeActionListener: removeActionListener
     };
 
-    var currentTrack, currentAlbum, currentTrackIsPlaying;
+    var currentTrack, currentAlbum, currentTrackIsPlaying, currentPosition, bufferedAmount;
     var actionListeners = [];
 
     return service;
@@ -81,11 +84,23 @@ function nowPlaying(spotifyAPI, navigator) {
     }
 
     function getPosition() {
-        return 100000;
+        return currentPosition;
+    }
+
+    function setPosition(position) {
+        currentPosition = position;
     }
 
     function getBuffered() {
-        return 200000;
+        return bufferedAmount;
+    }
+
+    function setBuffered(buffered) {
+        bufferedAmount = buffered;
+    }
+
+    function setBufferedFraction(fraction) {
+        bufferedAmount = fraction * getTrack().duration_ms;
     }
 
     function addActionListener(listener) {

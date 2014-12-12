@@ -1,7 +1,7 @@
 angular.module('vl.video')
     .controller('video', video);
 
-function video(youtubeSearchApi, $scope, nowPlaying) {
+function video(youtubeSearchApi, nowPlaying, $scope, $interval) {
     var ctrl = this;
 
     ctrl.playerReady = playerReady;
@@ -62,10 +62,6 @@ function video(youtubeSearchApi, $scope, nowPlaying) {
     };
     nowPlaying.addActionListener(actionListener);
 
-    $scope.$on('$destroy', function () {
-        nowPlaying.removeActionListener(actionListener);
-    });
-
     function playVideo() {
         player.playVideo();
     }
@@ -73,5 +69,17 @@ function video(youtubeSearchApi, $scope, nowPlaying) {
     function pauseVideo() {
         player.pauseVideo();
     }
+
+    var statusInterval = $interval(function () {
+        if (player) {
+            nowPlaying.setPosition(player.getCurrentTime() * 1000);
+            nowPlaying.setBufferedFraction(player.getVideoLoadedFraction());
+        }
+    }, 100);
+
+    $scope.$on('$destroy', function () {
+        nowPlaying.removeActionListener(actionListener);
+        $interval.cancel(statusInterval);
+    });
 
 }
