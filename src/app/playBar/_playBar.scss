@@ -1,5 +1,10 @@
 .play-bar {
   background: rgb(25, 25, 25);
+  opacity: 0.8;
+  transition: opacity 300ms;
+  &:hover {
+    opacity:1;
+  }
   .grid-content {
     padding: 0;
   }
@@ -13,11 +18,11 @@
   }
 
   .progressbar {
-    background:rgb(100,100,100);
+    background: rgb(100, 100, 100);
   }
 
   .bufferbar {
-    background:rgb(50,50,50);
+    background: rgb(50, 50, 50);
   }
 
 }
