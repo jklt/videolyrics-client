@@ -12,13 +12,14 @@ function nowPlaying(spotifyAPI) {
         pause: pause,
         isPlaying: isPlaying,
         setPlaying: setPlaying,
-        isPaused: isPaused,
         getPosition: getPosition,
-        getBuffered: getBuffered
+        getBuffered: getBuffered,
+        addActionListener: addActionListener,
+        removeActionListener: removeActionListener
     };
 
     var currentTrack, currentAlbum, currentTrackIsPlaying;
-    var paused = false;
+    var actionListeners = [];
 
     return service;
 
@@ -42,19 +43,19 @@ function nowPlaying(spotifyAPI) {
     }
 
     function next() {
-        console.log('next');
+        callAction('next');
     }
 
     function previous() {
-        console.log('previous')
+        callAction('previous');
     }
 
     function play() {
-        paused = false;
+        callAction('play');
     }
 
     function pause() {
-        paused = true;
+        callAction('pause');
     }
 
     function isPlaying() {
@@ -65,16 +66,30 @@ function nowPlaying(spotifyAPI) {
         currentTrackIsPlaying = playing;
     }
 
-    function isPaused() {
-        return paused;
-    }
-
     function getPosition() {
         return 100000;
     }
 
     function getBuffered() {
         return 200000;
+    }
+
+    function addActionListener(listener) {
+        actionListeners.push(listener);
+    }
+
+    function removeActionListener(listener) {
+        actionListeners = actionListeners.filter(function (currentListener) {
+            return currentListener !== listener
+        });
+    }
+
+    function callAction(action) {
+        angular.forEach(actionListeners, function (listener) {
+            if (listener[action]) {
+                listener[action]();
+            }
+        });
     }
 
 }

@@ -31,20 +31,6 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
         }
     });
 
-    $scope.$watch(function () {
-        return nowPlaying.isPaused();
-    }, function () {
-        if (nowPlaying.isPaused()) {
-            if (state === 1) {
-                player.pauseVideo();
-            }
-        } else {
-            if (state === 2) {
-                player.playVideo();
-            }
-        }
-    });
-
     function playerReady(event) {
         player = event.target;
         loadVideo();
@@ -80,6 +66,24 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
         if (player && videoId) {
             player.loadVideoById(videoId);
         }
+    }
+
+    var actionListener = {
+        play: playVideo,
+        pause: pauseVideo
+    };
+    nowPlaying.addActionListener(actionListener);
+
+    $scope.$on('$destroy', function () {
+        nowPlaying.removeActionListener(actionListener);
+    });
+
+    function playVideo() {
+        player.playVideo();
+    }
+
+    function pauseVideo() {
+        player.pauseVideo();
     }
 
 }
