@@ -47,24 +47,28 @@ function nowPlaying(spotifyAPI, navigator, $timeout) {
 
     function next() {
         callAction('next');
-        var playNextTrack = false;
-        angular.forEach(getAlbum().tracks.items, function (track) {
-            if (playNextTrack) {
-                navigator.track(getAlbum().id, track.id);
-            }
-            playNextTrack = track.id === getTrack().id;
-        });
+        if (getAlbum()) {
+            var playNextTrack = false;
+            angular.forEach(getAlbum().tracks.items, function (track) {
+                if (playNextTrack) {
+                    navigator.track(getAlbum().id, track.id);
+                }
+                playNextTrack = track.id === getTrack().id;
+            });
+        }
     }
 
     function previous() {
         callAction('previous');
-        var lastTrackId = null;
-        angular.forEach(getAlbum().tracks.items, function (track) {
-            if (track.id === getTrack().id && lastTrackId) {
-                navigator.track(getAlbum().id, lastTrackId);
-            }
-            lastTrackId = track.id;
-        });
+        if (getAlbum()) {
+            var lastTrackId = null;
+            angular.forEach(getAlbum().tracks.items, function (track) {
+                if (track.id === getTrack().id && lastTrackId) {
+                    navigator.track(getAlbum().id, lastTrackId);
+                }
+                lastTrackId = track.id;
+            });
+        }
     }
 
     function play() {
