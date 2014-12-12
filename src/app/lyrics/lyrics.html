@@ -1,5 +1,5 @@
 <div class="grid-content lyrics" ng-show="ctrl.lyrics">
     <div class="grid-container">
-        <div class="lyrics-text">{{ ctrl.lyrics }}</div>
+        <div ng-repeat="lyric in ctrl.lyrics track by $index" class="lyrics-text">{{ lyric }} <br/></div>
     </div>
 </div>

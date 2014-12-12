@@ -12,7 +12,9 @@ function lyrics(azLyricsAPI) {
     	ctrl.artist = track.artists[0].name;
     	azLyricsAPI.getLyrics(ctrl.artist, ctrl.track_name)
     		.then(function (response) {
-				ctrl.lyrics = response.data.lyrics;
+                var text = response.data.lyrics;
+                text.replace(/<br *\/>/gi, "\n");
+				ctrl.lyrics = text.split("\n");
     		});
     });
 }
