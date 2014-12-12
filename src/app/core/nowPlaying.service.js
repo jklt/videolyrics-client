@@ -1,7 +1,7 @@
 angular.module('vl.core')
     .factory('nowPlaying', nowPlaying);
 
-function nowPlaying(spotifyAPI) {
+function nowPlaying(spotifyAPI, navigator) {
     var service = {
         getTrack: getTrack,
         setTrack: setTrack,
@@ -44,10 +44,24 @@ function nowPlaying(spotifyAPI) {
 
     function next() {
         callAction('next');
+        var playNextTrack = false;
+        angular.forEach(getAlbum().tracks.items, function (track) {
+            if (playNextTrack) {
+                navigator.track(getAlbum().id, track.id);
+            }
+            playNextTrack = track.id === getTrack().id;
+        });
     }
 
     function previous() {
         callAction('previous');
+        var lastTrackId = null;
+        angular.forEach(getAlbum().tracks.items, function (track) {
+            if (track.id === getTrack().id && lastTrackId) {
+                navigator.track(getAlbum().id, lastTrackId);
+            }
+            lastTrackId = track.id;
+        });
     }
 
     function play() {
