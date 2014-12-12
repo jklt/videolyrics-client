@@ -1,7 +1,7 @@
 angular.module('vl.video')
     .controller('video', video);
 
-function video(youtubeSearchApi, $scope, nowPlaying, $location) {
+function video(youtubeSearchApi, nowPlaying, $scope, $interval) {
     var ctrl = this;
 
     ctrl.playerReady = playerReady;
@@ -31,20 +31,6 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
         }
     });
 
-    $scope.$watch(function () {
-        return nowPlaying.isPaused();
-    }, function () {
-        if (nowPlaying.isPaused()) {
-            if (state === 1) {
-                player.pauseVideo();
-            }
-        } else {
-            if (state === 2) {
-                player.playVideo();
-            }
-        }
-    });
-
     function playerReady(event) {
         player = event.target;
         loadVideo();
@@ -53,25 +39,15 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
     function stateChanged(event) {
         state = event.data;
         if (state === 0) {
-            spotifyAPI.getAlbum(albumId)
-                .then(function (album) {
-                    var nextTrack = false;
-                    angular.forEach(album.tracks.items, function (track) {
-                        if (nextTrack) {
-                            $location.path('albums/' + albumId + '/tracks/' + track.id);
-                            nextTrack = false;
-                        }
-                        if (track.id == trackId) {
-                            nextTrack = true;
-                        }
-                    })
-                });
+            nowPlaying.next();
         }
-        if (state === 1) {
-            nowPlaying.setPlaying(true);
-        } else {
-            nowPlaying.setPlaying(false);
-        }
+        $scope.$apply(function () {
+            if (state === 1) {
+                nowPlaying.setPlaying(true);
+            } else {
+                nowPlaying.setPlaying(false);
+            }
+        });
     }
 
     function loadVideo() {
@@ -79,5 +55,31 @@ function video(youtubeSearchApi, $scope, nowPlaying, $location) {
             player.loadVideoById(videoId);
         }
     }
+
+    var actionListener = {
+        play: playVideo,
+        pause: pauseVideo
+    };
+    nowPlaying.addActionListener(actionListener);
+
+    function playVideo() {
+        player.playVideo();
+    }
+
+    function pauseVideo() {
+        player.pauseVideo();
+    }
+
+    var statusInterval = $interval(function () {
+        if (player) {
+            nowPlaying.setPosition(player.getCurrentTime() * 1000);
+            nowPlaying.setBufferedFraction(player.getVideoLoadedFraction());
+        }
+    }, 100);
+
+    $scope.$on('$destroy', function () {
+        nowPlaying.removeActionListener(actionListener);
+        $interval.cancel(statusInterval);
+    });
 
 }

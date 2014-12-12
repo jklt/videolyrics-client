@@ -6,6 +6,5 @@ angular.module('vl.core', [
     'azLyrics',
 
     // 3th party dependencies
-    'ngRoute',          // Angular Router
-    'mm.foundation'    // Angular version of Foundation components
+    'ui.router'          // Angular Router
 ]);

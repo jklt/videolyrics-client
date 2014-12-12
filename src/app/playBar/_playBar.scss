@@ -1,116 +1,28 @@
+.play-bar {
+  background: rgb(25, 25, 25);
+  opacity: 0.8;
+  transition: opacity 300ms;
+  &:hover {
+    opacity:1;
+  }
+  .grid-content {
+    padding: 0;
+  }
+  .button, .button-group {
+    margin: 0;
+  }
+  .curtime {
+    font-size: 20px;
+    color: #fff;
+    padding: 1rem;
+  }
 
-.footer {
-   position:fixed;
-   left:0px;
-   bottom:0px;
-   height:50px;
-   width:100%;
-   background:rgb(25,25,25);
-}
+  .progressbar {
+    background: rgb(100, 100, 100);
+  }
 
+  .bufferbar {
+    background: rgb(50, 50, 50);
+  }
 
-
-.albumcover {
-   position:fixed;
-   left:0px;
-   bottom:100px;
-   height:200px;
-   width:200px;
-   background:rgb(50,50,50);
-}
-
-.albumcover:hover{
-  opacity:0.9;
-}
-
-.albuminfo{
-   position:fixed;
-   left:0px;
-   bottom:50px;
-   height:50px;
-   width:200px;
-   color:rgb(225,225,225);
-   background:rgb(25,25,25);
-}
-
-.albuminfo:hover{
-   background:rgb(50,50,50);
-}
-
-.albuminfo a{
-  color:inherit;
-   text-decoration: none;
-}
-.albuminfo a:hover{
-   text-decoration: underline;
-}
-
-.progressbar {
-    position:fixed;
-   left:200px;
-   bottom:0px;
-   height:50px;
-   width:25%;
-    background:rgb(100,100,100);
-}
-
-.bufferbar {
-    position:fixed;
-   left:200px;
-   bottom:0px;
-   height:50px;
-   width:50%;
-    background:rgb(50,50,50);
-}
-
-.curtime {
-    position:fixed;
-   right:60px;
-   bottom:5px;
-   font-size:20px;
-   color:rgb(225,225,225);
-}
-
-.fullscreen{
-  position:fixed;
-  display:inline-block;
-  padding:0;
-  margin:0;
-  right:0px;
-  height:50px;
-  width:50px;
-  background:rgb(25,25,25);
-}
-
-.playbutton{
-  position:fixed;
-  display:inline-block;
-  padding:0;
-  margin:0;
-  left:0px;
-  height:50px;
-    width:100px;
-   background:rgb(25,25,25);
-}
-
-.prevbutton{
-  display:inline-block;
- position:fixed;
-  padding:0;
-  margin:0;
-  left:100px;
-  height:50px;
-    width:50px;
-   background:rgb(25,25,25);
-}
-
-.nextbutton{
-    display:inline-block;
- position:fixed;
-  padding:0;
-  margin:0;
-  left:150px;
-  height:50px;
-    width:50px;
-   background:rgb(25,25,25);
 }

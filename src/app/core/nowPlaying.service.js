@@ -1,7 +1,7 @@
 angular.module('vl.core')
     .factory('nowPlaying', nowPlaying);
 
-function nowPlaying(spotifyAPI) {
+function nowPlaying(spotifyAPI, navigator, $timeout) {
     var service = {
         getTrack: getTrack,
         setTrack: setTrack,
@@ -12,13 +12,17 @@ function nowPlaying(spotifyAPI) {
         pause: pause,
         isPlaying: isPlaying,
         setPlaying: setPlaying,
-        isPaused: isPaused,
         getPosition: getPosition,
-        getBuffered: getBuffered
+        setPosition: setPosition,
+        getBuffered: getBuffered,
+        setBuffered: setBuffered,
+        setBufferedFraction: setBufferedFraction,
+        addActionListener: addActionListener,
+        removeActionListener: removeActionListener
     };
 
-    var currentTrack, currentAlbum, currentTrackIsPlaying;
-    var paused = false;
+    var currentTrack, currentAlbum, currentTrackIsPlaying, currentPosition, bufferedAmount;
+    var actionListeners = [];
 
     return service;
 
@@ -42,19 +46,33 @@ function nowPlaying(spotifyAPI) {
     }
 
     function next() {
-        console.log('next');
+        callAction('next');
+        var playNextTrack = false;
+        angular.forEach(getAlbum().tracks.items, function (track) {
+            if (playNextTrack) {
+                navigator.track(getAlbum().id, track.id);
+            }
+            playNextTrack = track.id === getTrack().id;
+        });
     }
 
     function previous() {
-        console.log('previous')
+        callAction('previous');
+        var lastTrackId = null;
+        angular.forEach(getAlbum().tracks.items, function (track) {
+            if (track.id === getTrack().id && lastTrackId) {
+                navigator.track(getAlbum().id, lastTrackId);
+            }
+            lastTrackId = track.id;
+        });
     }
 
     function play() {
-        paused = false;
+        callAction('play');
     }
 
     function pause() {
-        paused = true;
+        callAction('pause');
     }
 
     function isPlaying() {
@@ -65,16 +83,42 @@ function nowPlaying(spotifyAPI) {
         currentTrackIsPlaying = playing;
     }
 
-    function isPaused() {
-        return paused;
+    function getPosition() {
+        return currentPosition;
     }
 
-    function getPosition() {
-        return 100000;
+    function setPosition(position) {
+        currentPosition = position;
     }
 
     function getBuffered() {
-        return 200000;
+        return bufferedAmount;
+    }
+
+    function setBuffered(buffered) {
+        bufferedAmount = buffered;
+    }
+
+    function setBufferedFraction(fraction) {
+        bufferedAmount = fraction * getTrack().duration_ms;
+    }
+
+    function addActionListener(listener) {
+        actionListeners.push(listener);
+    }
+
+    function removeActionListener(listener) {
+        actionListeners = actionListeners.filter(function (currentListener) {
+            return currentListener !== listener
+        });
+    }
+
+    function callAction(action) {
+        angular.forEach(actionListeners, function (listener) {
+            if (listener[action]) {
+                listener[action]();
+            }
+        });
     }
 
 }

@@ -6,11 +6,12 @@ function playBar($location, nowPlaying) {
     var ctrl = this;
 
     // public interface:
-    ctrl.play = play;
+    ctrl.play = nowPlaying.play;
+    ctrl.pause = nowPlaying.pause;
     ctrl.next = next;
     ctrl.previous = previous;
 
-
+    ctrl.isPlaying = nowPlaying.isPlaying;
 
     ctrl.getTrack = getTrack;
     ctrl.getAlbum = getAlbum;
@@ -53,15 +54,6 @@ function playBar($location, nowPlaying) {
         var retval = nowPlaying.getBuffered();
         var secs = Math.floor(retval/1000);
         return secs;
-    }
-
-    function play() {
-        console.log("PLAY BUTTON PRESSED");
-        if (nowPlaying.isPlaying()){
-            nowPlaying.pause();
-        }else{
-            nowPlaying.play();
-        }
     }
 
     function next() {

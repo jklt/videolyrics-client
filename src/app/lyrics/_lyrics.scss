@@ -1,3 +1,24 @@
-.angular-with-newlines {
+.lyrics {
+  padding: 0;
+  .grid-container {
+    padding: 1rem;
+    max-width: 500px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+  }
+  .lyrics-text {
     white-space: pre-wrap;
+  }
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgb(0, 0, 0);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(50, 50, 50);
+  }
 }

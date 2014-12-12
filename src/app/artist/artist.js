@@ -2,9 +2,9 @@
 angular.module('vl.artist')
     .controller('artist', artist);
 
-function artist(spotifyAPI, $routeParams) {
+function artist(spotifyAPI, $stateParams) {
     var ctrl = this;
-    var artistId = $routeParams.artistId;
+    var artistId = $stateParams.artistId;
     ctrl.artist = spotifyAPI.getArtist(artistId)
         .then(function (response) {
         	console.log(response.data);

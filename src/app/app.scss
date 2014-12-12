@@ -1,12 +1,20 @@
 // Import Zurb Foundation CSS library (customize defaults in _settings.scss)
 @import "settings";
-@import "../../bower_components/foundation/scss/normalize";
-@import "../../bower_components/foundation/scss/foundation";
+@import "../../bower_components/foundation-apps/scss/foundation";
+
+// Fontawesome
+@import "../../bower_components/fontawesome/scss/font-awesome";
 
 // Imports for module specific CSS (e.g. app/moduleName/_moduleName.scss):
 @import "videoLyrics/trackList";
 @import "playBar/playBar";
+@import "albumCover/albumCover";
 @import "lyrics/lyrics";
+@import "search/searchBox";
+@import "search/searchResults";
 
 // Additional global CSS or SASS:
 // ...
+
+
+
