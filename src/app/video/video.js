@@ -71,7 +71,7 @@ function video(youtubeSearchApi, nowPlaying, $scope, $interval) {
     }
 
     var statusInterval = $interval(function () {
-        if (player) {
+        if (player && nowPlaying.getTrack()) {
             nowPlaying.setPosition(player.getCurrentTime() * 1000);
             nowPlaying.setBufferedFraction(player.getVideoLoadedFraction());
         }
