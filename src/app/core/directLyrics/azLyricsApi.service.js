@@ -7,11 +7,7 @@ function azLyricsAPI(azLyricsUri, $http, $q) {
     };
 
     function getLyrics(artist, song){
-        return $http.get(azLyricsUri, {
-            params: {
-                q: artist + ' ' + song
-            }
-        })
+        return $http.get(azLyricsUri + '/' + artist + '/' + song)
             .then(function (response) {
                 return response;
             });
