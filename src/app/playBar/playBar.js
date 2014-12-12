@@ -17,6 +17,18 @@ function playBar($location, nowPlaying) {
     ctrl.getAlbum = getAlbum;
     ctrl.getPosition = getPosition;
     ctrl.getBuffered = getBuffered;
+    ctrl.getPositionString = getPositionString;
+
+    function getPositionString(){
+        var secs = getPosition();
+        var retval = "";
+        if (secs%60 < 10){
+            retval = Math.floor(secs/60) + ':0' + secs%60;
+        }else{
+            retval = Math.floor(secs/60) + ':' + secs%60;
+        }
+        return retval;
+    }
 
     function getAlbum() {
         var retval = nowPlaying.getAlbum();
