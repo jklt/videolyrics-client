@@ -12,8 +12,6 @@ function config($stateProvider) {
         })
         .state('album', {
             url: '/albums/:albumId',
-            templateUrl: 'videoLyrics/videoLyrics.html',
-            controller: 'videoLyrics',
-            controllerAs: 'ctrl'
+            controller: 'album'
         });
 }
