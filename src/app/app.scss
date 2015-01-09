@@ -1,3 +1,11 @@
+[ui-view] .grid-content {
+  padding-bottom: 250px;
+}
+
+[ui-view] .grid-content .grid-block .grid-content {
+  padding-bottom: 1rem;
+}
+
 // Import Zurb Foundation CSS library (customize defaults in _settings.scss)
 @import "settings";
 @import "../../bower_components/foundation-apps/scss/foundation";
@@ -12,9 +20,17 @@
 @import "lyrics/lyrics";
 @import "search/searchBox";
 @import "search/searchResults";
+@import "artist/artist";
 
 // Additional global CSS or SASS:
 // ...
 
+.above-cover {
+  background: rgba(255, 255, 255, 0.15);
+}
 
-
+.album-cover-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

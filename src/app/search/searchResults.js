@@ -5,23 +5,14 @@ angular.module('vl.search')
 function searchResults($location, spotifyAPI) {
     var ctrl = this;
     ctrl.query = $location.search().q;
-    console.log('henk');
-    // musixMatchAPI.searchTracks(ctrl.query).then(function(data){
-    //     console.log('data');
-    //     console.log(data);
-    //     ctrl.tracks = data.data;
-    // });
     spotifyAPI.search(ctrl.query).then(function(data){
-        console.log('data');
-        console.log(data);
         ctrl.artists = data.artists.items;
         findThumbnails(ctrl.artists);
         ctrl.albums = data.albums.items;
+        console.log(ctrl.albums);
         findThumbnails(ctrl.albums);
     });
     spotifyAPI.searchTracks(ctrl.query).then(function(data){
-        console.log('data');
-        console.log(data);
         ctrl.tracks = data.tracks.items;
     });
 }
