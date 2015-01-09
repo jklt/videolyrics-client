@@ -1,5 +1,6 @@
 <div class="grid-content trackList show-for-medium">
-    <p>Album: <strong>{{ctrl.getAlbum().name}}</strong></p>
+    <div><strong>{{ctrl.getAlbum().name}}</strong></div>
+    <div ng-repeat="artist in ctrl.getAlbum().artists"><em>{{artist.name}}</em></div>
 
     <ol>
         <li ng-repeat="track in ctrl.getAlbum().tracks.items"

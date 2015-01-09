@@ -58,7 +58,8 @@ function video(youtubeSearchApi, nowPlaying, $scope, $interval) {
 
     var actionListener = {
         play: playVideo,
-        pause: pauseVideo
+        pause: pauseVideo,
+        seek: seek
     };
     nowPlaying.addActionListener(actionListener);
 
@@ -68,6 +69,10 @@ function video(youtubeSearchApi, nowPlaying, $scope, $interval) {
 
     function pauseVideo() {
         player.pauseVideo();
+    }
+
+    function seek(fraction) {
+        player.seekTo(player.getDuration() * fraction, true);
     }
 
     var statusInterval = $interval(function () {

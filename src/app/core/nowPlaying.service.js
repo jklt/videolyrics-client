@@ -10,6 +10,7 @@ function nowPlaying(spotifyAPI, navigator, $timeout) {
         previous: previous,
         play: play,
         pause: pause,
+        seek: seek,
         isPlaying: isPlaying,
         setPlaying: setPlaying,
         getPosition: getPosition,
@@ -117,10 +118,14 @@ function nowPlaying(spotifyAPI, navigator, $timeout) {
         });
     }
 
-    function callAction(action) {
+    function seek(fraction) {
+        callAction('seek', [fraction]);
+    }
+
+    function callAction(action, parameters) {
         angular.forEach(actionListeners, function (listener) {
             if (listener[action]) {
-                listener[action]();
+                listener[action].apply(null, parameters);
             }
         });
     }

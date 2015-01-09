@@ -7,13 +7,11 @@ function artist(spotifyAPI, $stateParams) {
     var artistId = $stateParams.artistId;
     ctrl.artist = spotifyAPI.getArtist(artistId)
         .then(function (response) {
-        	console.log(response.data);
             ctrl.artist =  response.data;
             ctrl.artist.thumbnail = findThumbnail(ctrl.artist.images);
         });
     ctrl.albums = spotifyAPI.getArtistAlbums(artistId)
         .then(function (response) {
-        	console.log(response.data);
             ctrl.albums =  response.data.items;
             findThumbnails(ctrl.albums);
         });

@@ -16,13 +16,11 @@
     <div class="grid-block bars">
         <div class="grid-content shrink progressbar" style="width:{{ctrl.getPosition()/ctrl.getTrack().duration_secs*100}}%;"></div>
         <div class="grid-content shrink bufferbar" style="width:{{ctrl.getBuffered()/ctrl.getTrack().duration_secs*100-ctrl.getPosition()/ctrl.getTrack().duration_secs*100}}%;"></div>
+        <div class="seekbar" ng-click="ctrl.seek($event)"></div>
     </div>
-    <div class="grid-block shrink vertical align-center">
+    <div class="grid-block shrink vertical align-center curtime-container">
         <div class="grid-content shrink">
             <span class="curtime">{{ctrl.getPositionString()}}</span>
         </div>
-    </div>
-    <div class="grid-content shrink">
-        <button class="large button"><i class="fa fa-fw fa-expand"></i></button>
     </div>
 </div>

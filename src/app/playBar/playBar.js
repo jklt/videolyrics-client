@@ -10,6 +10,7 @@ function playBar($location, nowPlaying) {
     ctrl.pause = nowPlaying.pause;
     ctrl.next = next;
     ctrl.previous = previous;
+    ctrl.seek = seek;
 
     ctrl.isPlaying = nowPlaying.isPlaying;
 
@@ -19,23 +20,23 @@ function playBar($location, nowPlaying) {
     ctrl.getBuffered = getBuffered;
     ctrl.getPositionString = getPositionString;
 
-    function getPositionString(){
+    function getPositionString() {
         var secs = getPosition();
         var retval = "";
-        if (secs%60 < 10){
-            retval = Math.floor(secs/60) + ':0' + secs%60;
-        }else{
-            retval = Math.floor(secs/60) + ':' + secs%60;
+        if (secs % 60 < 10) {
+            retval = Math.floor(secs / 60) + ':0' + secs % 60;
+        } else {
+            retval = Math.floor(secs / 60) + ':' + secs % 60;
         }
         return retval;
     }
 
     function getAlbum() {
         var retval = nowPlaying.getAlbum();
-        if (!retval){
+        if (!retval) {
             return undefined;
         }
-        if (retval.images.length == 0){
+        if (retval.images.length == 0) {
             retval.images[0] = "http://asset-d.soup.io/asset/1377/8322_d804_48-square.png";
         }
         return retval;
@@ -43,38 +44,46 @@ function playBar($location, nowPlaying) {
 
     function getTrack() {
         var retval = nowPlaying.getTrack();
-        if (!retval){
+        if (!retval) {
             return undefined;
         }
-        var secs = Math.floor(retval.duration_ms/1000);
+        var secs = Math.floor(retval.duration_ms / 1000);
         retval.duration_secs = secs;
-        if (secs%60 < 10){
-            retval.durationstr = Math.floor(secs/60) + ':0' + secs%60;
-        }else{
-            retval.durationstr = Math.floor(secs/60) + ':' + secs%60;
+        if (secs % 60 < 10) {
+            retval.durationstr = Math.floor(secs / 60) + ':0' + secs % 60;
+        } else {
+            retval.durationstr = Math.floor(secs / 60) + ':' + secs % 60;
         }
         return retval;
     }
 
     function getPosition() {
         var retval = nowPlaying.getPosition();
-        var secs = Math.floor(retval/1000);
-        return secs;
+        if (retval) {
+            var secs = Math.floor(retval / 1000);
+            return secs;
+        } else {
+            return 0;
+        }
     }
 
     function getBuffered() {
         var retval = nowPlaying.getBuffered();
-        var secs = Math.floor(retval/1000);
+        var secs = Math.floor(retval / 1000);
         return secs;
     }
 
     function next() {
         nowPlaying.next();
-        console.log("NEXT BUTTON PRESSED");
     }
 
     function previous() {
         nowPlaying.previous();
-        console.log("PREVIOUS BUTTON PRESSED");
+    }
+
+    function seek($event) {
+        var position = angular.isDefined($event.offsetX) ? $event.offsetX : $event.layerX;
+        var total = $event.target.clientWidth;
+        nowPlaying.seek(position / total);
     }
 }

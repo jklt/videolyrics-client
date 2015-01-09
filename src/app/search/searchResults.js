@@ -9,7 +9,6 @@ function searchResults($location, spotifyAPI) {
         ctrl.artists = data.artists.items;
         findThumbnails(ctrl.artists);
         ctrl.albums = data.albums.items;
-        console.log(ctrl.albums);
         findThumbnails(ctrl.albums);
     });
     spotifyAPI.searchTracks(ctrl.query).then(function(data){
